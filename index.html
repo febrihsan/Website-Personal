@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Situs Kopi</title>
+  <!-- Box Icons-->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons/css/boxicons.min.css">
+  <style>
+      /* Font Google */
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    
+    * {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-padding-top: 4rem;
+      scroll-behavior: smooth;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    /* Variabel */
+    :root {
+      --main-color: #bc9667; 
+      --second-color: #edeae3;
+      --text-color: #1b1b1b;
+      --bg-color: #fff;   
+      /* Box Shadow*/
+      --box--shadow: 2px 2px 10px 4px rgb(14 55 54 / 15%);
+    }
+    section {
+      padding: 50px 100px;
+    }
+    img {
+      width: 100%;
+    }
+
+    body {
+      color: var(--text-color);
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      right: 0;
+      z-index: 1000000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 100px;
+      transition: 0.5s linear;
+      
+    }
+    header.shadow{
+      background: var(--text-color);
+      box-shadow: var(--box--shadow);
+    }
+    .logo img {
+      width: 60px;
+    }
+    .navbar {
+      display:  flex;
+      justify-content: flex-end; /* Menu di sebelah kanan */
+    }
+    .navbar a {
+      padding: 8px 17px;
+      color: var(--bg-color);
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .navbar a:hover {
+      background: var(--main-color);
+      border-radius: 0.2rem;
+      transition: 0.2s all linear;
+    }
+    .header-icon {
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      column-gap: 0.8rem;
+    }
+    .header-icon .bx {
+      color:var(--bg-color);
+    }
+    .header-icon .bx:hover {
+      color: var(--main-color);
+    }
+    #Menu-icon {
+      color: var(--main-color);
+      font-size:  24px;
+      z-index: 100001;
+      cursor: pointer;
+      display: none;
+    }
+    .search-box {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%);
+      background: var(--bg-color);
+      width: 100%;
+      display: flex;
+    }
+
+    .search-box.active {
+      top: -110%; /* Ganti dengan nilai yang sesuai agar kotak pencarian tertutup */
+      box-shadow: var(--box--shadow);
+      transition: 0.2s all linear;
+    }
+    .search-box input {
+      padding: 10px;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+    .search-box input::placeholder {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .home {
+      width: 100%;
+      min-height: 100vh;
+      background: url(img/bg.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(17rem,auto));
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .home-text h1 {
+      font-size:  3.4rem;
+      color: var(--main-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .home-text p {
+      font-size: 0.938rem;
+      color: var(--bg-color);
+      margin: 0.5rem 1.4rem;
+    }
+    .btn {
+      padding: 10px 40px;
+      border-radius: 0.3rem;
+      background-position: var(--text-color);
+      color: var(--main-color);
+      font-weight: 500;
+    }
+    .btn:hover {
+      background: var(--bg-color);
+    }
+    .about{
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(17rem, auto));
+     gap: 1.5rem; 
+    }
+    .about-img img{
+      border-radius: 0.5rem;
+    }
+    .about-text h2 {
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
+.about-text p {
+  font-size: 0.938rem;
+  margin: 0.5rem 0 1.1rem;
+}
+
+.about-text a {
+  display: inline-block;
+  padding: 10px 40px;
+  border-radius: 0.3rem;
+  background-color: var(--main-color);
+  color: var(--bg-color);
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.about-text a:hover {
+  background: #8a6f4d;
+}
+    .heading {
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .heading h2{
+      font-size: 1.8rem;
+      text-transform: uppercase;
+    }
+   /* Style untuk produk */
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.box {
+  flex: 1 0 calc(33.33% - 10.5rem);
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.5rem;
+  box-shadow: var(--box--shadow);
+}
+
+.box img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  object-position: auto;
+  padding: 20px;
+  background: #f1f1f1;
+  border-radius: 0.5rem;
+}
+.products-container .box .content span{
+  padding: 0 1rem;
+  color: var(--bg-color);
+  background: var(--main-color);
+  border-radius: 2px;
+  font-weight: 100;
+  margin-bottom: 0.5rem;
+}
+.products-container .box .content a{
+  padding: 0.5rem;
+  color: var(--text-color);
+  border: 2px solid var(--main-color);
+  border-radius: 1px;
+  text-transform: uppercase;
+  transition: 0.2s all linear;
+}
+.products-container .box .content a:hover{
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+/*customers*/
+ .customers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, auto));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.customers-container .box {
+  padding: 20px;
+  box-shadow: var(--box--shadow);
+  border-radius: 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Tengah secara vertikal */
+  height: 100%; /* Tinggi tetap */
+}
+
+.star .bx {
+  color: var(--main-color);
+}
+
+.customers-container .box p {
+  font-size: 0.938rem;
+}
+
+.customers-container .box h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.5rem;
+}
+
+.customers-container .box img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.customers-container .box:hover {
+  background: var(--second-color);
+  transition: 0.2s all linear;
+}
+.footer{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+  gap: 1.5rem;
+}
+.footer-box h2{
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.footer-box p{
+  font-size: 0.938rem;
+  margin-bottom: 10px;
+}
+.social{
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+.social a .bx{
+  font-size: 24px;
+  color: var(--text-color);
+  padding: 10px;
+  background: var(--second-color);
+  border-radius: 0.2rem;
+}
+.social a .bx:hover{
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+.footer-box h3{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.footer-box li a{
+  color: var(--text-color);
+}
+.footer-box li a:hover{
+  color: var(--main-color);
+}
+.contact{
+  display: flex;
+  flex-direction: column;
+  
+}
+.contact span{
+  display: flex;
+  align-items: center;
+}
+.contact i{
+  font-size: 20px;
+  margin-right: 0.5rem;
+}
+.copyright{
+  padding: 10px;
+  text-align: center;
+  background: var(--text-color);
+}
+.copyright p{
+  color: var(--main-color);
+}
+
+@media only screen and (max-width: 768px) {
+  /* Atur tata letak untuk layar kecil di sini */
+  header {
+    padding: 18px 20px; /* Ubah padding agar sesuai dengan layar kecil */
+  }
+  .logo img {
+    width: 40px; /* Ubah ukuran logo agar sesuai dengan layar kecil */
+  }
+  .navbar {
+    justify-content: center; /* Menu menjadi tengah pada layar kecil */
+    flex-direction: column; /* Menu menjadi satu kolom pada layar kecil */
+    align-items: center;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: var(--text-color); /* Warna latar belakang menu */
+    display: none; /* Sembunyikan menu awalnya */
+  }
+  .navbar.active {
+    display: flex; /* Tampilkan menu saat diaktifkan */
+  }
+  .navbar a {
+    width: 100%; /* Lebar menu penuh pada layar kecil */
+    text-align: center; /* Teks menjadi tengah */
+    padding: 15px 0; /* Atur padding menu */
+    border-bottom: 1px solid var(--bg-color); /* Garis pembatas antar menu */
+  }
+  #Menu-icon {
+    display: block; /* Tampilkan ikon menu di layar kecil */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <a href="#" class="logo">
+      <img src="img/logo.png" alt="">
+    </a>
+    <!-- Menu-icons-->
+    <i class='bx bx-menu' id="Menu-icon"></i>
+    <!-- Links -->
+    <ul class="navbar">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#customers">Customers</a></li>
+    </ul>
+    <!-- Icon -->
+    <div class="header-icon">
+      <i class='bx bx-cart-alt'></i>
+      <i class='bx bx-search' id="search-icon"></i>
+    </div>
+    <!--Search Box-->
+    <div class="search-box">
+      <input type="search" name="" id="" placeholder="Search Here...">
+    </div>
+  </header>
+  <!--home-->
+  <section class="home" id="home">
+    <div class="home-text">
+      <h1>Start Your Day <br> With Coffee </h1>
+      <p>Awali Pagimu dengan secangkir kopi, karena jika ingin mengawali hari denganmu itu hanyalah Mimpi.</p>
+      <a href="#products" class="btn">Order Now</a>
+    </div>
+    <div class="home-img">
+      <img src="img/main.png" alt="">
+    </div>
+  </section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-img">
+    <img src="img/about.jpg" alt="">
+  </div>
+  <div class="about-text">
+    <h2>Our History</h2>
+    <p> Kedai sederhana dengan setiap cangkir kopi menandai bab baru dalam cerita kami</p>
+    <p> Di tengah keramaian kota, di mana kehidupan berjalan dengan cepat, kedai kopi kita muncul sebagai tempat perlindungan bagi mereka yang mencari ketenangan, inspirasi, dan pelarian sesaat dari rutinitas harian.</p>
+    <p> Tempa sederhana yang membuat sebuah kisah yang dianyam dengan benang-benang aromatik kopi, semangat, dan komunitas</p>
+    <a href="#" class="btn">Learn More</a>
+  </div>
+</section>
+<!-- Products -->
+<section class="products" id="products">
+  <div class="heading">
+    <h2>Our Popular Products</h2>
+  </div>
+  <!-- Container -->
+  <div class="products-container">
+    <!-- Group 1 -->
+    <div class="product-group">
+      <div class="box" data-name="Arabica">
+        <img src="img/p1.png" alt="">
+        <div class="content">
+          <h3>Arabica</h3>
+          <span>Rp.25.000</span>
+        </div>
+      </div>
+      <div class="box" data-name="Caffe Latte">
+        <img src="img/p2.png" alt="">
+        <div class="content">
+          <h3>Caffe Latte</h3>
+          <span>Rp.20.000</span>
+        </div>
+      </div>
+      <div class="box" data-name="Espreso">
+        <img src="img/p3.png" alt="">
+        <div class="content">
+          <h3>Espreso</h3>
+          <span>Rp.25.000</span>
+        </div>
+      </div>
+    </div>
+    <!-- Group 2 -->
+    <div class="product-group">
+      <div class="box" data-name="Americano">
+        <img src="img/p4.png" alt="">
+        <div class="content">
+          <h3>Americano</h3>
+          <span>Rp.15.000</span>
+        </div>
+      </div>
+      <div class="box" data-name="Capuccino">
+        <img src="img/p5.png" alt="">
+        <div class="content">
+          <h3>Capuccino</h3>
+          <span>Rp.30.000</span>
+        </div>
+      </div>
+      <div class="box" data-name="Presto">
+        <img src="img/p6.png" alt="">
+        <div class="content">
+          <h3>Presto</h3>
+          <span>Rp.35.000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--customers-->
+<section class="customers" id="customers">
+  <div class="heading">
+    <h2>Our customer's</h2>
+  </div>
+  <!--ustomers-->
+  <div class="customers-container">
+    <div class="box">
+      <div class="star">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star-half'></i>
+      </div>
+      <p>Kedai kopi ini adalah tempat yang saya cari-cari. Kopinya lezat, suasana santai, dan pelayanannya ramah sekali. Sering kali saya datang untuk rapat bisnis atau sekadar bersantai. Suka banget.</p>
+      <h2>Sapto</h2>
+      <img src="img/rev1.jpg" alt="">
+    </div>
+    <div class="box">
+      <div class="star">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+      </div>
+      <p>Desain interior kedai kopi ini keren banget! Setiap kunjungan memberikan inspirasi baru. Pilihan kopi mereka juga beragam, dan barista selalu punya rekomendasi yang pas. Favorit saya untuk brainstorming</p>
+      <h2>Ipul</h2>
+      <img src="img/rev2.jpg" alt="">
+      
+    </div><div class="box">
+      <div class="star">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+      </div>
+      <p>Kedai kopi ini seperti rumah kedua buatku. Tempatnya cozy, sering ada acara seni, dan kopi mereka enak banget. Sering datang buat belajar atau sekadar ngobrol sama teman. Terima kasih udah jadi tempat nyaman</p>
+      <h2>Jamila</h2>
+      <img src="img/rev3.jpg" alt="">
+      
+    </div>
+  </div>
+</section>
+<!--Support-->
+<section class="footer">
+  <div class="footer-box">
+    <h2>Coffee Shop</h2>
+    <p> "Nikmatnya kopi" Ikuti petualangan rasa kopi yang tak terlupakan dan momen kehangatan melalui sosial media kami</p>
+    <div class="social">
+      <a href="#"><i class='bx bxl-facebook'></i></a>
+      <a href="#"><i class='bx bxl-instagram'></i></a>
+      <a href="#"><i class='bx bxl-telegram'></i></a>
+      <a href="#"><i class='bx bxl-tiktok'></i></a>
+    </div>
+  </div>
+  <div class="footer-box">
+    <h3>Support</h3>
+    <li><a href="#">products</a></li>
+    <li><a href="#">Help & support</a></li>
+    <li><a href="#">Return Policy</a></li>
+    <li><a href="#">Terms of Use</a></li>
+    <li><a href="#">products</a></li>
+  </div>
+  <div class="footer-box">
+    <h3>View Guides</h3>
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Careers</a></li>
+    <li><a href="#">Blog Posts</a></li>
+    <li><a href="#">Our Brances</a></li>
+  </div>
+  <div class="footer-box">
+    <h3>Contact</h3>
+    <div class="contact">
+      <span><i class='bx bxs-map'></i>Currently in Indonesia </span>
+      <span><i class='bx bxs-phone'></i>+62 81243853050</span>
+      <span><i class='bx bxs-envelope'></i>Coffeeshop.com</span>
+    </div>
+  </div>
+</section>
+
+<!--Copyright-->
+<div class="copyright">
+  <p>&#169; Febriyanto Hasan  2023</p>
+</div>
+
+ <!-- Link ke JS -->
+ <script src="main.js"></script>
+ <script>
+  // Fungsi Toggle Search Box
+  let searchIcon = document.getElementById('search-icon');
+  let searchBox = document.querySelector('.search-box');
+
+  searchIcon.onclick = () => {
+    searchBox.classList.toggle('active');
+    searchInput.focus(); // Fokus pada input pencarian saat menampilkan kotak pencarian
+  };
+
+  // Fungsi Search
+  let searchInput = document.querySelector('.search-box input');
+  let products = document.querySelectorAll('.box');
+
+  searchInput.addEventListener('input', function () {
+    let searchTerm = searchInput.value.toLowerCase();
+
+    products.forEach(product => {
+      let productName = product.getAttribute('data-name').toLowerCase();
+
+      if (productName.includes(searchTerm)) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
+    });
+  });
+
+  // Fungsi Scroll Navbar
+  let header = document.querySelector('header');
+
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow', window.scrollY > 0)
+  });
+
+  // Fungsi Toggle Navbar
+  let menuIcon = document.getElementById('Menu-icon');
+  let navbar = document.querySelector('.navbar');
+
+  menuIcon.onclick = () => {
+    navbar.classList.toggle('active');
+  };
+
+  // Fungsi Pencarian Produk setelah Klik Menu Product
+  let menuProduct = document.querySelector('li a[href="#products"]');
+
+  menuProduct.addEventListener('click', function () {
+    let searchTerm = 'product'; // Ganti dengan kata kunci yang sesuai dengan produk yang ingin dicari
+    searchInput.value = searchTerm;
+
+    products.forEach(product => {
+      let productName = product.getAttribute('data-name').toLowerCase();
+
+      if (productName.includes(searchTerm)) {
+        product.style.display = 'block';
+      } else {
+        product.style.display = 'none';
+      }
+    });
+
+    searchBox.classList.add('active'); // Menampilkan kotak pencarian
+    searchInput.focus(); // Fokus pada input pencarian
+  });
+</script>
+</body>
+</html>
